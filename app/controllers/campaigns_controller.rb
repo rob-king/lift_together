@@ -15,14 +15,22 @@ class CampaignsController < ApplicationController
   end
 
   def create
-    @campaign = Campaign.create!(campaign_params)
-    redirect_to @campaign
+    @campaign = Campaign.new(campaign_params)
+    if @campaign.save
+      redirect_to @campaign
+    else
+      render 'new'
+    end
   end
 
   def update
     @campaign = Campaign.find(params[:id])
-    @campaign.update(campaign_params)
-    redirect_to @campaign
+
+    if @campaign.update(campaign_params)
+      redirect_to @campaign
+    else
+      render 'edit'
+    end
   end
 
   private
