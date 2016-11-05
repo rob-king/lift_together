@@ -1,0 +1,16 @@
+<%= form_for @campaign do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :organization %>
+  <%= f.text_field :organization %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :end_date %>
+  <%= f.date_field :end_date %>
+
+  <%= f.label :goal_amount %>
+  <%= f.number_field :goal_amount %>
+<% end %>
