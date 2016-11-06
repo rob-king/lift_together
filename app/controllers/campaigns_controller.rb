@@ -26,6 +26,7 @@ class CampaignsController < ApplicationController
 
   def update
     @campaign = Campaign.find(params[:id])
+    @campaign.user = current_user
 
     if @campaign.update(campaign_params)
       redirect_to @campaign
