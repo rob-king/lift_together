@@ -10,8 +10,7 @@
     </h1>
     <h2><small class="text-muted"><%= @campaign.organization %></small></h2>
     <p>Ends in <%= distance_of_time_in_words(@campaign.end_date, Time.now)%> (<%= @campaign.end_date.strftime("%D") %>)</p>
-    <p>Goal: $<%= @campaign.goal_amount %></p>
-    <p><%= @campaign.current_amount %></p>
+    <p>$<%= number_with_precision(@campaign.current_amount, :precision => 2, :delimiter => ',') %> of $<%= number_with_precision(@campaign.goal_amount, :precision => 2, :delimiter => ',') %> raised </p>
     <progress class="progress progress-striped" value="<%= @campaign.current_amount %>" max="<%= @campaign.goal_amount %>">
     </progress>
   </div>
