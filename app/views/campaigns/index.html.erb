@@ -1,2 +1,19 @@
 <h1>Campaigns#index</h1>
-<p>Find me in app/views/campaigns/index.html.erb</p>
+
+<% @campaigns.each do |campaign| %>
+  <div class="row">
+    <div class="media">
+      <div class="media-left">
+        <a href="/campaigns/<%= campaign.id %>">
+          <img class="media-object" src="http://placehold.it/64x64" alt="" />
+        </a>
+      </div>
+      <div class="media-body">
+        <a href="/campaigns/<%= campaign.id %>">
+          <h4 class="media-heading"><%= campaign.name %></h4>
+        </a>
+        <p><%= campaign.description %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
