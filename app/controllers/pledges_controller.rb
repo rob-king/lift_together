@@ -9,6 +9,8 @@ class PledgesController < ApplicationController
     @pledge = @campaign.pledges.new(pledge_params)
     @pledge.user = current_user
     if @pledge.save
+      @campaign.current_amount += @pledge.amount
+      @campaign.save
       redirect_to @campaign
     else
       render 'new'

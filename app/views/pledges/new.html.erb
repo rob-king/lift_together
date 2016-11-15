@@ -1,7 +1,7 @@
-<h1>Support <%= @campaign.name %> </h1>
+<h1><%= link_to @campaign.name, @campaign %> </h1>
 
 <%= form_for [@campaign, @pledge] do |f|%>
   <%= f.label :amount %>
   <%= f.number_field :amount %>
-  <%= f.submit "Pledge" %>
+  <%= f.submit "Give" %>
 <% end %>

@@ -9,8 +9,13 @@
     <h1><%= @campaign.name %></h1>
     <h2><small class="text-muted"><%= @campaign.organization %></small></h2>
     <p>Ends in <%= distance_of_time_in_words(@campaign.end_date, Time.now)%> (<%= @campaign.end_date.strftime("%D") %>)</p>
-    <progress class="progress progress-striped" value="<%= @campaign.current_amount %>" max="<%= @campaign.goal_amount %>"></progress>
+    <% if @campaign.current_amount >= @campaign.goal_amount %>
+      <progress class="progress progress-success" value="<%= @campaign.current_amount %>" max="<%= @campaign.goal_amount %>"></progress>
+    <% else %>
+      <progress class="progress progress-info" value="<%= @campaign.current_amount %>" max="<%= @campaign.goal_amount %>"></progress>
+    <% end %>
     <p>$<%= number_with_precision(@campaign.current_amount, :precision => 2, :delimiter => ',') %> of $<%= number_with_precision(@campaign.goal_amount, :precision => 2, :delimiter => ',') %> raised </p>
+    <p><%= link_to "Support", new_campaign_pledge_path(@campaign) %></p>
   </div>
 </div>
 <div class="row description">

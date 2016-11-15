@@ -9,7 +9,12 @@ class CampaignsController < ApplicationController
   end
 
   def edit
-    @campaign = Campaign.find(params[:id])
+    if @campaign.user != current_user
+      @campaign = Campaign.find(params[:id])
+    else
+      flash[:errors] =  "Only the Campaign's creator can edit a campaign"
+      redirect @campaign
+    end
   end
 
   def new
