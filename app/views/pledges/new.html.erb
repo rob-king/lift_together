@@ -2,6 +2,6 @@
 
 <%= form_for [@campaign, @pledge] do |f|%>
   <%= f.label :amount %>
-  <%= f.number_field :amount, class: :text_field, step: :any %>
+  <%= f.number_field :amount %>
   <%= f.submit "Pledge" %>
 <% end %>
