@@ -1,0 +1,6 @@
+<h2>Supporters</h2>
+<% @pledges.each do |pledge| %>
+  <div class="row">
+    <%= pledge.user.email %>, $<%= pledge.amount %>
+  </div>
+<% end %>
