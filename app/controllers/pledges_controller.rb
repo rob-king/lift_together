@@ -1,4 +1,6 @@
 class PledgesController < ApplicationController
+  before_action :authenticate_user!
+  
   def new
     @campaign = Campaign.find(params[:campaign_id])
     @pledge = @campaign.pledges.new
@@ -13,7 +15,8 @@ class PledgesController < ApplicationController
       @campaign.save
       redirect_to @campaign
     else
-      render 'new'
+      flash[:errors] = @pledge.errors.full_messages
+      redirect_to new_campaign_pledge_path(@campaign,@pledge)
     end
   end
 

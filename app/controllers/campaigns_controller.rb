@@ -1,4 +1,5 @@
 class CampaignsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
   def index
     @campaigns = Campaign.all
   end
@@ -9,11 +10,11 @@ class CampaignsController < ApplicationController
   end
 
   def edit
+    @campaign = Campaign.find(params[:id])
     if @campaign.user != current_user
-      @campaign = Campaign.find(params[:id])
-    else
-      flash[:errors] =  "Only the Campaign's creator can edit a campaign"
-      redirect @campaign
+      flash[:errors] = []
+      flash[:errors] << "Only the Campaign's creator can edit a campaign."
+      redirect_to @campaign
     end
   end
 
@@ -39,6 +40,17 @@ class CampaignsController < ApplicationController
       redirect_to @campaign
     else
       render 'edit'
+    end
+  end
+
+  def destroy
+    @campaign = Campaign.find(params[:id])
+    if @campaign.user == current_user
+      @campaign.destroy
+      redirect_to campaigns_path
+    else
+      flash[:errors] = "Only the creator of the campaign can delete it."
+      redirect_to @campaign
     end
   end
 

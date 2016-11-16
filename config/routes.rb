@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  root 'campaigns#index'
   devise_for :users
   resources :campaigns do
     resources :pledges, only: [ 'create','new', 'show']

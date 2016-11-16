@@ -1,5 +1,12 @@
 <h1>Campaigns#show</h1>
 <p id="notice"><%= notice %></p>
+<% if flash[:errors] %>
+  <div class="alert alert-danger">
+      <% flash[:errors].each do |error| %>
+        <%= content_tag :p, error %>
+      <% end %>
+  </div>
+  <% end %>
 
 <div class="row">
   <div class="col-md-4">
@@ -7,6 +14,10 @@
   </div>
   <div class="col-md-4">
     <h1><%= @campaign.name %></h1>
+    <% if @campaign.user == current_user %>
+    <%= link_to "Edit", edit_campaign_path(@campaign), class:"btn btn-primary" %>
+    <%= link_to "Delete", @campaign, method: :delete, class:"btn btn-danger"  %>
+    <% end %>
     <h2><small class="text-muted"><%= @campaign.organization %></small></h2>
     <p>Ends in <%= distance_of_time_in_words(@campaign.end_date, Time.now)%> (<%= @campaign.end_date.strftime("%D") %>)</p>
     <% if @campaign.current_amount >= @campaign.goal_amount %>
