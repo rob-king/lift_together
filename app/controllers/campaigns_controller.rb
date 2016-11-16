@@ -1,7 +1,7 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.not_expired
   end
 
   def show
@@ -14,6 +14,10 @@ class CampaignsController < ApplicationController
     if @campaign.user != current_user
       flash[:errors] = []
       flash[:errors] << "Only the Campaign's creator can edit a campaign."
+      redirect_to @campaign
+    elsif @campaign.expired?
+      flash[:errors] = []
+      flash[:errors] << "Campaign has expired."
       redirect_to @campaign
     end
   end

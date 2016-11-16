@@ -20,4 +20,8 @@ class Campaign < ApplicationRecord
         self.expired = true
       end
     end
+
+    def future_end_date?
+      self.end_date.future?
+    end
 end
