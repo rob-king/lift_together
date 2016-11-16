@@ -6,8 +6,8 @@ class Campaign < ApplicationRecord
     has_many :pledges, dependent: :destroy
     after_find :check_expired
 
-    
-
+    scope :expired, -> { where(expired:true)}
+    scope :not_expired, -> { where(expired:false)}
 
     def expired?
       self.end_date < Time.now

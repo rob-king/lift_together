@@ -1,4 +1,3 @@
-<h1>Campaigns#show</h1>
 <p id="notice"><%= notice %></p>
 <% if flash[:errors] %>
   <div class="alert alert-danger">
@@ -8,32 +7,10 @@
   </div>
   <% end %>
 
-<div class="row">
-  <div class="col-md-4">
-    <img src="http://placehold.it/300x300" alt="" />
-  </div>
-  <div class="col-md-4">
-    <h1><%= @campaign.name %></h1>
-    <% if @campaign.user == current_user %>
-    <%= link_to "Edit", edit_campaign_path(@campaign), class:"btn btn-primary" %>
-    <%= link_to "Delete", @campaign, method: :delete, class:"btn btn-danger"  %>
-    <% end %>
-    <h2><small class="text-muted"><%= @campaign.organization %></small></h2>
-    <p>Ends in <%= distance_of_time_in_words(@campaign.end_date, Time.now)%> (<%= @campaign.end_date.strftime("%D") %>)</p>
-    <% if @campaign.current_amount >= @campaign.goal_amount %>
-      <progress class="progress progress-success" value="<%= @campaign.current_amount %>" max="<%= @campaign.goal_amount %>"></progress>
-    <% else %>
-      <progress class="progress progress-info" value="<%= @campaign.current_amount %>" max="<%= @campaign.goal_amount %>"></progress>
-    <% end %>
-    <p>$<%= number_with_precision(@campaign.current_amount, :precision => 2, :delimiter => ',') %> of $<%= number_with_precision(@campaign.goal_amount, :precision => 2, :delimiter => ',') %> raised </p>
-    <p><%= link_to "Support", new_campaign_pledge_path(@campaign) %></p>
-  </div>
-</div>
-<div class="row description">
-  <div class="col-md-12">
-    <p class="lead">
-      <%= @campaign.description %>
-    </p>
-  </div>
-</div>
+<% if @campaign.expired? %>
+  <%= render 'expired_campaign' %>
+<% else %>
+  <%= render 'campaign' %>
+<% end %>
+
 <%= render 'pledges' %>
