@@ -2,6 +2,7 @@ class Campaign < ApplicationRecord
     validates :end_date, :goal_amount, presence:true
     validates :description, length: {minimum: 30}, presence: true
     validates :name, :organization, length: {minimum: 3}, presence: true
+    validate :check_future_end_date
     belongs_to :user
     has_many :pledges, dependent: :destroy
     after_find :check_expired
@@ -13,6 +14,10 @@ class Campaign < ApplicationRecord
       self.end_date < Time.now
     end
 
+    def future_end_date?
+      self.end_date.future?
+    end
+
     private
 
     def check_expired
@@ -21,7 +26,9 @@ class Campaign < ApplicationRecord
       end
     end
 
-    def future_end_date?
-      self.end_date.future?
+    def check_future_end_date
+      if not self.future_end_date?
+        errors.add(:end_date, "needs to be set in the future")
+      end
     end
 end
