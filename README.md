@@ -1,24 +1,23 @@
-# README
+# Lift Together
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
 
-Things you may want to cover:
+Lift Together is a small crowd funding and donation drive application that allows users to create campaigns or support products and causes with pledges.
 
-* Ruby version
+## Technology Stack
 
-* System dependencies
+* Ruby and Ruby on Rails
+* Bootstrap
 
-* Configuration
 
-* Database creation
+## Installation instructions
 
-* Database initialization
+* Clone down repo
+* Create the database and run the database migrations
+* Seed the database with the included `Seeds.rb`
 
-* How to run the test suite
+The primary test user is `test@example.com` with the password `tester`
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+Live demo: [Lift Together on Heroku](https://lift-together.herokuapp.com/)
