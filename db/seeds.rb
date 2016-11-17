@@ -40,7 +40,7 @@ Pledge.destroy_all
 10.times {
   Campaign.create(name: Faker::Commerce.product_name,
                   organization: "#{Faker::Company.name} #{Faker::Company.suffix}",
-                  description: Faker::Lorem.paragraph,
+                  description: Faker::Hipster.paragraphs(3).join(' '),
                   end_date: 500.days.from_now,
                   goal_amount: rand(5..200000),
                   current_amount: rand(5..200000),
