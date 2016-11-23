@@ -5,6 +5,7 @@ class Campaign < ApplicationRecord
     validate :check_future_end_date
     belongs_to :user
     has_many :pledges, dependent: :destroy
+    #excellent use of after find! your implementation of this feature is very rails-natural
     after_find :check_expired
 
     scope :expired, -> { where(expired:true)}

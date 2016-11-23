@@ -10,6 +10,7 @@ class PledgesController < ApplicationController
     @campaign = Campaign.find(params[:campaign_id])
     @pledge = @campaign.pledges.new(pledge_params)
     @pledge.user = current_user
+    # you could also add the block on lines 15-17 to an after_create method in pledge.rb
     if @pledge.save
       @campaign.current_amount += @pledge.amount
       @campaign.save

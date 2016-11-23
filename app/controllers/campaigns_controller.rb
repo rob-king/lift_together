@@ -1,5 +1,7 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
+  # Your controller looks nice and lean, you could off load some of of the data-prep in your views to your controllers too keep your views clean and minimal
+  # Really well-written controller
   def index
     @campaigns = Campaign.not_expired
   end
@@ -59,7 +61,7 @@ class CampaignsController < ApplicationController
   end
 
   private
-
+  #nice formatting
   def campaign_params
     params.require(:campaign).permit(:name,
       :description,
