@@ -1,0 +1,1 @@
+nice to find out about the graphviz and the rails-erd gem, pretty slick; gonna use this in the future myself ^^
