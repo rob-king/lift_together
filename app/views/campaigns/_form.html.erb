@@ -12,20 +12,11 @@
     </div>
   <% end %>
 
-<%= form_for @campaign do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :organization %>
-  <%= f.text_field :organization %>
-
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-
-  <%= f.label :end_date %>
-  <%= f.date_select :end_date %>
-
-  <%= f.label :goal_amount %>
-  <%= f.number_field :goal_amount %>
-  <%= f.submit "Save" %>
+<%= bootstrap_form_for @campaign do |f| %>
+    <%= f.text_field :name %>
+    <%= f.text_field :organization %>
+    <%= f.text_field :description %>
+    <%= f.date_select :end_date %>
+    <%= f.number_field :goal_amount %>
+    <%= f.submit "Save" %>
 <% end %>
